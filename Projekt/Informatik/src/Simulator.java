@@ -43,10 +43,27 @@ public class Simulator extends Thread {
 	 */
 	private void erzeugePflanzen() {
 
-		// TODO: fehlende Implementierung erg√§nzen (siehe Aufgabe 1a)
+		// TODO: fehlende Implementierung erg√§nzen (siehe Aufgabe 1a)		
+		
+		double KOHL_ERZEUGUNG = Math.random();
+		int height = getHeight();
+		int width = getWidth();
+		int z‰hler=0;
+		for (int i=0; i<height; i++) {
+			for (int j=0; j<width;j++) {
+				boolean empty= isEmpty(i,j);
+				boolean good= goodSoil(i,j);
+				if (empty==true&&good==true&&KOHL_ERZEUGUNG>0.5){
+					erzeugeKohl(i,j);
+					z‰hler++;
+					System.out.println("Kohl Nummer "+z‰hler+" bei "+i+"  "+j);
+				}
+			}
+		}
+		
+		
 
 	}
-
 
 	/*
 	 * **** Ab hier muss am Programmcode nichts ge√§ndert werden *****
