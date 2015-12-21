@@ -11,7 +11,6 @@ import java.util.Vector;
  * @author Frank Leßke
  * @version 14.1.2005
  */
-// DAS IST EIN TEST!!!111einself
 
 public class Feld {
 
