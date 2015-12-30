@@ -28,6 +28,27 @@ public class Simulator extends Thread {
 	private void bevoelkere(Feld feld) {
 		Random random = new Random();
 		feld.clear();
+		
+		//1b
+		double ERZEUGUNG;
+		int height = feld.getHeight();
+		int width = feld.getWidth();
+		System.out.println("Feldgröße "+height+" + "+width);
+		int zähler=0;
+		for (int i=0; i<height; i++) {
+			for (int j=0; j<width;j++) {
+				ERZEUGUNG = Math.random();
+				if (ERZEUGUNG>0.5){
+					erzeugeKohl(i,j);
+					zähler++;
+					System.out.println("Initial-Kohl Nummer "+zähler+" bei "+i+"  "+j);
+				}
+				else if (ERZEUGUNG<0.5){
+					erzeugeHase(i,j);
+					zähler++;
+				}
+			}
+		}
 
 		// TODO: fehlende Implementierung ergÃ¤nzen
 		// erzeuge zufÃ¤llig zuerst Pflanzen, dann spÃ¤ter Hasen, dann FÃ¼chse
@@ -45,7 +66,7 @@ public class Simulator extends Thread {
 
 		// TODO: fehlende Implementierung ergÃ¤nzen (siehe Aufgabe 1a)		
 		
-		double KOHL_ERZEUGUNG = Math.random();
+		double RANDOM_ERZEUGUNG;
 		int height = getHeight();
 		int width = getWidth();
 		int zähler=0;
@@ -53,7 +74,8 @@ public class Simulator extends Thread {
 			for (int j=0; j<width;j++) {
 				boolean empty= isEmpty(i,j);
 				boolean good= goodSoil(i,j);
-				if (empty==true&&good==true&&KOHL_ERZEUGUNG>0.5){
+				RANDOM_ERZEUGUNG = Math.random();
+				if (empty==true&&good==true&&KOHL_ERZEUGUNG>=RANDOM_ERZEUGUNG){
 					erzeugeKohl(i,j);
 					zähler++;
 					System.out.println("Kohl Nummer "+zähler+" bei "+i+"  "+j);
