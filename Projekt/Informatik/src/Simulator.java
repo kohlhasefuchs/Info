@@ -38,12 +38,12 @@ public class Simulator extends Thread {
 		for (int i=0; i<height; i++) {
 			for (int j=0; j<width;j++) {
 				ERZEUGUNG = Math.random();
-				if (ERZEUGUNG>0.5){
+				if (ERZEUGUNG<KOHL_ERZEUGUNG){
 					erzeugeKohl(i,j);
 					zähler++;
 					System.out.println("Initial-Kohl Nummer "+zähler+" bei "+i+"  "+j);
 				}
-				else if (ERZEUGUNG<0.5){
+				else if (ERZEUGUNG<HASE_ERZEUGUNG){
 					erzeugeHase(i,j);
 					zähler++;
 				}
