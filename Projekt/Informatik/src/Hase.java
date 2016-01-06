@@ -33,7 +33,7 @@ public class Hase extends Tier {
  
   // Gesamtzahl der Hasen
   public static int anzahl = 0;
-  
+  //TEST
   
   
   /**
