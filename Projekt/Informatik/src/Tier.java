@@ -17,7 +17,12 @@ public abstract class Tier extends PositionsObjekt implements Lebewesen {
    * Faktor fort.
    */
 	public void run(Feld altesFeld, Feld neuesFeld, HashMap neueTiere) {
-
+		erhoeheAlter();
+		erhoeheHunger();
+		if (istLebendig()){
+			
+		}
+		
 		// TODO: fehlende Implementierung ergänzen (siehe Aufgabe 2b)
 		
 	}

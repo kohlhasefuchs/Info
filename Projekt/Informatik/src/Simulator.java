@@ -265,9 +265,9 @@ public class Simulator extends Thread {
 				next.setLocation(pos);
 				aktualisiertesFeld.platziere(next);
 			} else {
-				iter.remove();
-				((Tier)next).sterbe();
-				toDelete.add((Lebewesen)next);
+			//	iter.remove();
+			//	((Tier)next).sterbe();
+			//	toDelete.add((Lebewesen)next);
 			}
 		}
 
