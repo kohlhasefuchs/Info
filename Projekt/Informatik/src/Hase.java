@@ -35,17 +35,33 @@ public class Hase extends Tier {
   public static int anzahl = 0;
   //TEST
   
+  private static double SATT_FAKTOR = 0.05;
+  
+  private static int MAX_HUNGER = 2;
+  //TEST
+  
   
   /**
-   * ÃœberprÃ¼ft, ob sich ein Hase fortpflanzen kann. 
-   * Gibt als Ergebnis die Anzahl der Kinder zurÃ¼ck (kleiner gleich MAX_BRUT)
+   * Überprüft, ob sich ein Hase fortpflanzen kann. 
+   * Gibt als Ergebnis die Anzahl der Kinder zurück (kleiner gleich MAX_BRUT)
    */
   protected int fortpflanzen() {
     
-    // TODO: fehlende Implementierung ergÃ¤nzen (siehe Aufgabe 2c)
-  
-    // Voreinstellung: wenn der Hase sich nicht fortpflanzen kann ist das Ergebnis 0
-    return 0;
+    // TODO: fehlende Implementierung ergänzen (siehe Aufgabe 2c)
+  int alter = getAlter();
+  int hunger = getHunger();
+  double gesamtw = ((hunger*SATT_FAKTOR)+PAARUNGS_WAHRSCHEINLICHKEIT);
+  double Zufall = Math.random();
+  int Brut;
+  // Hungrige hasen-> unwahrscheinlicher, Satte Hasen-> wahrscheinlicher
+  //=> je satter, desto wahrscheinlicher
+  if (alter>REIFE_ALTER&&Zufall<gesamtw&&hunger>MAX_HUNGER){
+	  Zufall = Math.random();
+	  Brut = (int)Math.round(Zufall*MAX_BRUT);
+	  return Brut;
+  }
+  else{
+	  return 0;	  
   }
   
   

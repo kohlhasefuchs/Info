@@ -21,6 +21,14 @@ public abstract class Tier extends PositionsObjekt implements Lebewesen {
 		erhoeheAlter();
 		erhoeheHunger();
 		if (istLebendig()){
+			int fortpflanzen = fortpflanzen();
+			if (fortpflanzen>0){
+				while (fortpflanzen>0){
+				erzeugeTier(neueTiere);
+				fortpflanzen--;			//fortpflanzen ist eine zahl zwischen 0 und MAX_BRUT der klasse Hase/Fuchs und gibt die anzahl der geburten an
+			}							//Desalb so viele tiere gebären, bis fortpflanzen=0
+			}
+System.out.println(getHunger());
 				sucheFressen(altesFeld);
 				if (fressenGefunden()){
 					geheZumFressen(neuesFeld);
