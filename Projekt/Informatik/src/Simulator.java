@@ -41,10 +41,15 @@ public class Simulator extends Thread {
 					erzeugeKohl(i,j);
 					zähler++;
 				}
-				else if (ERZEUGUNG<HASE_ERZEUGUNG){
+				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG){  //Hase+Kohl, um den Fall abzudecken, dass die kohlwahrscheinlichkeit höher ist als die hasenwahrscheinlichkeit
 					erzeugeHase(i,j);
 					zähler++;
 				}
+				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG+FUCHS_ERZEUGUNG){
+					erzeugeFuchs(i,j);
+					zähler++;
+				}
+				else zähler++;
 			}
 		}
 

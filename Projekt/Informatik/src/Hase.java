@@ -33,12 +33,13 @@ public class Hase extends Tier {
  
   // Gesamtzahl der Hasen
   public static int anzahl = 0;
-  //TEST
-  
+ 
+  //--FD--
+  //Faktor, um den ein satter Hase sich besser vermehrt ("fleiß")
   private static double SATT_FAKTOR = 0.05;
   
+  //Hunger-Wert, unter dem ein hase zu hungrig ist, sich zu vermehren
   private static int MAX_HUNGER = 2;
-  //TEST
   
   
   /**
@@ -47,23 +48,29 @@ public class Hase extends Tier {
    */
   protected int fortpflanzen() {
     
-    // TODO: fehlende Implementierung ergänzen (siehe Aufgabe 2c)
   int alter = getAlter();
   int hunger = getHunger();
-  double gesamtw = ((hunger*SATT_FAKTOR)+PAARUNGS_WAHRSCHEINLICHKEIT);
-  double Zufall = Math.random();
-  int Brut;
-  // Hungrige hasen-> unwahrscheinlicher, Satte Hasen-> wahrscheinlicher
-  //=> je satter, desto wahrscheinlicher
-  if (alter>REIFE_ALTER&&Zufall<gesamtw&&hunger>MAX_HUNGER){
-	  Zufall = Math.random();
-	  Brut = (int)Math.round(Zufall*MAX_BRUT);
-	  return Brut;
+  if(alter>REIFE_ALTER&&hunger>MAX_HUNGER){  //vorlagerung der alters und Hunger-Frage, um Laufzeit zu verbessern
+	  double gesamtw = ((hunger*SATT_FAKTOR)+PAARUNGS_WAHRSCHEINLICHKEIT);
+	  double Zufall = Math.random();
+	  int Brut;
+	  // Hungrige hasen-> unwahrscheinlicher, Satte Hasen-> wahrscheinlicher
+	  //=> je satter, desto wahrscheinlicher
+	  	if (Zufall<gesamtw){
+	  		Zufall = Math.random(); //neuer Zufallswert, um Anzahl der Kinder festzustellen
+	  		Brut = (int)Math.round(Zufall*MAX_BRUT);
+	  		return Brut;
+	  	}
+	  	else{
+		  	return 0;	  
+		}
   }
-  else{
-	  return 0;	  
+	  else{
+	  	return 0;	  
+	  }
   }
-  }
+  
+  
   
   
   /*******************************

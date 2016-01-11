@@ -17,10 +17,19 @@ public abstract class Tier extends PositionsObjekt implements Lebewesen {
    * Faktor fort.
    */
 	public void run(Feld altesFeld, Feld neuesFeld, HashMap neueTiere) {
-		//2b
 		erhoeheAlter();
 		erhoeheHunger();
 		if (istLebendig()){
+			
+			System.out.println("in while   "+altesFeld); //TODO remove			
+			sucheFressen(altesFeld);
+			if (fressenGefunden()){
+				geheZumFressen(neuesFeld);
+			}
+			else {
+				geheNaechstesFreiesFeld(neuesFeld, getLocation());
+			}
+
 			int fortpflanzen = fortpflanzen();
 			if (fortpflanzen>0){
 				while (fortpflanzen>0){
@@ -28,14 +37,8 @@ public abstract class Tier extends PositionsObjekt implements Lebewesen {
 				fortpflanzen--;			//fortpflanzen ist eine zahl zwischen 0 und MAX_BRUT der klasse Hase/Fuchs und gibt die anzahl der geburten an
 			}							//Desalb so viele tiere gebären, bis fortpflanzen=0
 			}
-System.out.println(getHunger());
-				sucheFressen(altesFeld);
-				if (fressenGefunden()){
-					geheZumFressen(neuesFeld);
-				}
-				else {
-					geheNaechstesFreiesFeld(neuesFeld, getLocation());
-				}
+			
+
 			
 		}
 

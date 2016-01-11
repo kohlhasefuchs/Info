@@ -53,7 +53,28 @@ public class Fuchs extends Tier {
   protected Location findeFressen(Feld feld) {
 
 	  // TODO: fehlende Implementierung ergänzen (siehe Aufgabe 3)
-
+	// durchsuche alle Nachbarpositionen
+		  for (int i = 0; i < 8; i++) {
+			  
+			  // prüfe, ob Nachbar noch innerhalb des Feldes liegt
+			  if (liegtAufFeld(feld, i)) {
+				  
+				  // Hole die Nachbar-Location
+				  Location loc = getNachbarPosition(feld, i);
+				  
+				  // prüfe, ob darauf Kohl liegt
+				  if (stehtHase(feld, loc)) {
+					  
+					  // hole den Kohl und prüfe, ob dieser essbar ist
+					  Hase hase = getHase(feld, loc);
+					 // if (essbar(hase)) {
+					//	  fresse(hase);
+					//	  setSatt(getHunger() + HASEN_FUTTER);
+					//	  return loc;
+					//  }
+				  }
+			  }			
+		  }
 	  
 	  // falls kein Hase gefunden wird, dann gebe null zurück  
 	  return null;
