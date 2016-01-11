@@ -63,6 +63,7 @@ public class Hase extends Tier {
   else{
 	  return 0;	  
   }
+  }
   
   
   /*******************************
