@@ -14,32 +14,33 @@ public class Hase extends Tier {
    *****************************************************/
  
   // das Alter, ab dem sich ein Hase fortpflanzen kann
-  private static final int REIFE_ALTER = 5;
-  
-  // die maximale Lebendauer eines Hasen
-  static int MAX_ALTER = 50;
-  
-  // die Fortpflanzungswahrscheinlichkeit
-  static double PAARUNGS_WAHRSCHEINLICHKEIT = 0.2;
-  
-  // die maximale Anzahl von Nachkommen
-  static int MAX_BRUT = 5;
-  
-  // gemeinsamer Zufallsgenerator zur Geburtenkontrolle
-  private static final Random random = new Random();
-  
-  // wieviel Essenspunkte bringt das Verzehren eines Kohls
-  private static final int KOHL_FUTTER = 2;
- 
-  // Gesamtzahl der Hasen
-  public static int anzahl = 0;
- 
-  //--FD--
-  //Faktor, um den ein satter Hase sich besser vermehrt ("fleiﬂ")
-  private static double SATT_FAKTOR = 0.05;
-  
-  //Hunger-Wert, unter dem ein hase zu hungrig ist, sich zu vermehren
-  private static int MAX_HUNGER = 2;
+	 private static final int REIFE_ALTER = 5;
+	  
+	  // die maximale Lebendauer eines Hasen
+	  static int MAX_ALTER = 50;
+	  
+	  // die Fortpflanzungswahrscheinlichkeit
+	  static double PAARUNGS_WAHRSCHEINLICHKEIT = 0.2;
+	  
+	  // die maximale Anzahl von Nachkommen
+	  static int MAX_BRUT = 5;
+	  
+	  // gemeinsamer Zufallsgenerator zur Geburtenkontrolle
+	  private static final Random random = new Random();
+	  
+	  // wieviel Essenspunkte bringt das Verzehren eines Kohls
+	  private static final int KOHL_FUTTER = 2;
+	 
+	  // Gesamtzahl der Hasen
+	  public static int anzahl = 0;
+	 
+	  //--FD--
+	  //Faktor, um den ein satter Hase sich besser vermehrt ("fleiﬂaufgabe")
+	  private static double SATT_FAKTOR = 0.05;
+	  
+	  //Hunger-Wert, unter dem ein hase zu hungrig ist, sich zu vermehren
+	  private static int MAX_HUNGER = 2;
+
   
   
   /**
