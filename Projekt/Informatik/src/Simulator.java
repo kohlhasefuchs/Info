@@ -33,7 +33,6 @@ public class Simulator extends Thread {
 		double ERZEUGUNG;
 		int height = feld.getHeight();
 		int width = feld.getWidth();
-		System.out.println("Feldgröße "+height+" + "+width);
 		int zähler=0;
 		for (int i=0; i<height; i++) {
 			for (int j=0; j<width;j++) {
@@ -41,12 +40,16 @@ public class Simulator extends Thread {
 				if (ERZEUGUNG<KOHL_ERZEUGUNG){
 					erzeugeKohl(i,j);
 					zähler++;
-					System.out.println("Initial-Kohl Nummer "+zähler+" bei "+i+"  "+j);
 				}
-				else if (ERZEUGUNG<HASE_ERZEUGUNG){
+				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG){  //Hase+Kohl, um den Fall abzudecken, dass die kohlwahrscheinlichkeit höher ist als die hasenwahrscheinlichkeit
 					erzeugeHase(i,j);
 					zähler++;
 				}
+				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG+FUCHS_ERZEUGUNG){
+					erzeugeFuchs(i,j);
+					zähler++;
+				}
+				else zähler++;
 			}
 		}
 
@@ -78,7 +81,6 @@ public class Simulator extends Thread {
 				if (empty==true&&good==true&&KOHL_ERZEUGUNG>=RANDOM_ERZEUGUNG){
 					erzeugeKohl(i,j);
 					zähler++;
-					System.out.println("Kohl Nummer "+zähler+" bei "+i+"  "+j);
 				}
 			}
 		}

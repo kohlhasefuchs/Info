@@ -16,11 +16,14 @@ public abstract class Tier extends PositionsObjekt implements Lebewesen {
    * Wenn möglich, dann pflanzen sich die Tier noch um einen zufälligen
    * Faktor fort.
    */
+	
+	private boolean getötet = false;
+
 	public void run(Feld altesFeld, Feld neuesFeld, HashMap neueTiere) {
-		//2b
 		erhoeheAlter();
 		erhoeheHunger();
-		if (istLebendig()){
+		if (istLebendig()){		
+			if (getLocation()!=null){  //TODO remove! Hier wird der fehler abgefangen, läuft trotzdem!
 				sucheFressen(altesFeld);
 				if (fressenGefunden()){
 					geheZumFressen(neuesFeld);
@@ -28,11 +31,20 @@ public abstract class Tier extends PositionsObjekt implements Lebewesen {
 				else {
 					geheNaechstesFreiesFeld(neuesFeld, getLocation());
 				}
-			
+				int fortpflanzen = fortpflanzen();
+				if (fortpflanzen>0){
+					while (fortpflanzen>0){
+						erzeugeTier(neueTiere);
+						fortpflanzen--;			//fortpflanzen ist eine zahl zwischen 0 und MAX_BRUT der klasse Hase/Fuchs und gibt die anzahl der geburten an
+					}						//Desalb so viele tiere gebären, bis fortpflanzen=0
+				}
+			}
 		}
-
-		// TODO: fehlende Implementierung ergänzen (siehe Aufgabe 2b)
-		
+	}
+	
+	//Tier wird gejagt/erlegt von JÃ¤ger/Fuchs
+	public void wirdGetötet() {
+		getötet = true;
 	}
 
   
@@ -65,7 +77,7 @@ public abstract class Tier extends PositionsObjekt implements Lebewesen {
    */
   private void erzeugeTier(HashMap neueTiere) {
     Tier kind = geburt();
-    neueTiere.put(kind, this);
+    neueTiere.put(kind, this);	
   }
   
   /**

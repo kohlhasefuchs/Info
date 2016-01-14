@@ -14,39 +14,64 @@ public class Hase extends Tier {
    *****************************************************/
  
   // das Alter, ab dem sich ein Hase fortpflanzen kann
-  private static final int REIFE_ALTER = 5;
-  
-  // die maximale Lebendauer eines Hasen
-  static int MAX_ALTER = 50;
-  
-  // die Fortpflanzungswahrscheinlichkeit
-  static double PAARUNGS_WAHRSCHEINLICHKEIT = 0.2;
-  
-  // die maximale Anzahl von Nachkommen
-  static int MAX_BRUT = 5;
-  
-  // gemeinsamer Zufallsgenerator zur Geburtenkontrolle
-  private static final Random random = new Random();
-  
-  // wieviel Essenspunkte bringt das Verzehren eines Kohls
-  private static final int KOHL_FUTTER = 2;
- 
-  // Gesamtzahl der Hasen
-  public static int anzahl = 0;
-  //TEST
+	 private static final int REIFE_ALTER = 5;
+	  
+	  // die maximale Lebendauer eines Hasen
+	  static int MAX_ALTER = 50;
+	  
+	  // die Fortpflanzungswahrscheinlichkeit
+	  static double PAARUNGS_WAHRSCHEINLICHKEIT = 0.2;
+	  
+	  // die maximale Anzahl von Nachkommen
+	  static int MAX_BRUT = 5;
+	  
+	  // gemeinsamer Zufallsgenerator zur Geburtenkontrolle
+	  private static final Random random = new Random();
+	  
+	  // wieviel Essenspunkte bringt das Verzehren eines Kohls
+	  private static final int KOHL_FUTTER = 2;
+	 
+	  // Gesamtzahl der Hasen
+	  public static int anzahl = 0;
+	 
+	  //--FD--
+	  //Faktor, um den ein satter Hase sich besser vermehrt ("fleißaufgabe")
+	  private static double SATT_FAKTOR = 0.05;
+	  
+	  //Hunger-Wert, unter dem ein hase zu hungrig ist, sich zu vermehren
+	  private static int MAX_HUNGER = 2;
+
   
   
   /**
-   * ÃœberprÃ¼ft, ob sich ein Hase fortpflanzen kann. 
-   * Gibt als Ergebnis die Anzahl der Kinder zurÃ¼ck (kleiner gleich MAX_BRUT)
+   * Überprüft, ob sich ein Hase fortpflanzen kann. 
+   * Gibt als Ergebnis die Anzahl der Kinder zurück (kleiner gleich MAX_BRUT)
    */
   protected int fortpflanzen() {
     
-    // TODO: fehlende Implementierung ergÃ¤nzen (siehe Aufgabe 2c)
-  
-    // Voreinstellung: wenn der Hase sich nicht fortpflanzen kann ist das Ergebnis 0
-    return 0;
+  int alter = getAlter();
+  int hunger = getHunger();
+  if(alter>REIFE_ALTER&&hunger>MAX_HUNGER){  //vorlagerung der alters und Hunger-Frage, um Laufzeit zu verbessern
+	  double gesamtw = ((hunger*SATT_FAKTOR)+PAARUNGS_WAHRSCHEINLICHKEIT);
+	  double Zufall = Math.random();
+	  int Brut;
+	  // Hungrige hasen-> unwahrscheinlicher, Satte Hasen-> wahrscheinlicher
+	  //=> je satter, desto wahrscheinlicher
+	  	if (Zufall<gesamtw){
+	  		Zufall = Math.random(); //neuer Zufallswert, um Anzahl der Kinder festzustellen
+	  		Brut = (int)Math.round(Zufall*MAX_BRUT);
+	  		return Brut;
+	  	}
+	  	else{
+		  	return 0;	  
+		}
   }
+	  else{
+	  	return 0;	  
+	  }
+  }
+  
+  
   
   
   /*******************************

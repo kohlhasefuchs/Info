@@ -14,63 +14,114 @@ public class Fuchs extends Tier {
    ****************************************************/
   
   // das Alter, ab dem sich ein Fuchs fortpflanzen kann
-  private static final int REIFE_ALTER = 10;
-  
-  // die maximale Lebendauer von einem Fuchs
-  static int MAX_ALTER = 40;
-  
-  // die Fortpflanzungswahrscheinlichkeit
-  static double PAARUNGS_WAHRSCHEINLICHKEIT = 0.6;
-  
-  // die maximale Anzahl von Nachkommen
-  static int MAX_BRUT = 2;
-  
-  // wieviel Essenspunkte bringt das Verzehren eines Hasens
-  private static int HASEN_FUTTER = 3;
-  
-  // Gesamtzahl der FÃ¼chse
-  public static int anzahl = 0;
-  
-  // die generelle Fuchs-Jagdwahrscheinlichkeit 
-  static double JAGD_WAHRSCHEINLICHKEIT = 0.5;
-  
-  // die Jagdwahrscheinlichkeit (eines einzelnen Fuchses)
-  double jagdWahrsch;
-  
-  // gemeinsamer Zufallsgenerator zur Geburtenkontrolle
-  private static final Random random = new Random();
-  
-  // das anzuzeigende Bild
-  private Image fuchsBild;
-  
-  /**
-   * Suche auf dem Feld feld auf den direkt angrenzenden Nachbarpositionen 
-   * zur Position des Fuchses nach etwas zum Fressen.
-   * FÃ¼chse fressen Hasen. Wenn ein Hase gefunden wird, so wird dieser getÃ¶tet und verspeist.
-   * Allerdings hÃ¤ngt das JagdglÃ¼ck auch etwas vom Zufall ab.
-   * Als Ergebnis wird die Position des Hasens zurÃ¼ckgegeben.
-   */
-  protected Location findeFressen(Feld feld) {
-
-	  // TODO: fehlende Implementierung ergÃ¤nzen (siehe Aufgabe 3)
-
+	private static final int REIFE_ALTER = 10;
 	  
-	  // falls kein Hase gefunden wird, dann gebe null zurÃ¼ck  
-	  return null;
-  }
+	  // die maximale Lebendauer von einem Fuchs
+	  static int MAX_ALTER = 40;
+	  
+	  // die Fortpflanzungswahrscheinlichkeit
+	  static double PAARUNGS_WAHRSCHEINLICHKEIT = 0.6;
+	  
+	  // die maximale Anzahl von Nachkommen
+	  static int MAX_BRUT = 2;
+	  
+	  // wieviel Essenspunkte bringt das Verzehren eines Hasens
+	  private static int HASEN_FUTTER = 3;
+	  
+	  // Gesamtzahl der Füchse
+	  public static int anzahl = 0;
+	  
+	  // die generelle Fuchs-Jagdwahrscheinlichkeit 
+	  static double JAGD_WAHRSCHEINLICHKEIT = 0.5;
+	  
+	  // die Jagdwahrscheinlichkeit (eines einzelnen Fuchses)
+	  double jagdWahrsch;
+	  
+	  // gemeinsamer Zufallsgenerator zur Geburtenkontrolle
+	  private static final Random random = new Random();
+	  
+	  // das anzuzeigende Bild
+	  private Image fuchsBild;
+	  
+	  //Je satter der Fuchs, desto niedriger sein Jagdglück um SATT_FAKTOR
+	  private double SATT_FAKTOR = 0.097;
+	  
+	  /**
+	   * Suche auf dem Feld feld auf den direkt angrenzenden Nachbarpositionen 
+	   * zur Position des Fuchses nach etwas zum Fressen.
+	   * Füchse fressen Hasen. Wenn ein Hase gefunden wird, so wird dieser getötet und verspeist.
+	   * Allerdings hängt das Jagdglück auch etwas vom Zufall ab.
+	   * Als Ergebnis wird die Position des Hasens zurückgegeben.
+	   */
+	  protected Location findeFressen(Feld feld) {
+		  int hunger;
+		  // TODO: fehlende Implementierung ergänzen (siehe Aufgabe 3)
+		// durchsuche alle Nachbarpositionen
+			  for (int i = 0; i < 8; i++) {
+				  
+				  // prüfe ob Nachbar noch innerhalb des Feldes liegt
+				  if (liegtAufFeld(feld, i)) {
+					  
+					  // Hole Nachbar-Position
+					  Location loc = getNachbarPosition(feld, i);
+					  
+					  // prüfe ob darauf ein hase steht
+					  if (stehtHase(feld, loc)) {
+						  
+						  // hole den Hasen und prüfe, ob dieser essbar ist
+						  Hase hase = getHase(feld, loc);
+						  double jagdw = Math.random();
+						  hunger = getHunger();
+						  if (hase.istLebendig()&&jagdw<(JAGD_WAHRSCHEINLICHKEIT-hunger*SATT_FAKTOR)) {
+							  fresse(hase);
+							  setSatt(getHunger() + HASEN_FUTTER);
+							  return loc;
+						  }
+					  }
+				  }			
+			  }
+		  
+		  // falls kein Hase gefunden wird, dann gebe null zurück  
+		  return null;
+	  }
+
+	  /**
+	   * Überprüft, ob sich ein Fuchs fortpflanzen kann. 
+	   * Gibt als Ergebnis die Anzahl der Kinder zurück (kleiner gleich MAX_BRUT)
+	   */
+	  protected int fortpflanzen() {
+	    
+		  // TODO: fehlende Implementierung ergänzen (siehe Aufgabe 3)
+		  int alter = getAlter();
+		  int hunger = getHunger();
+		  if(alter>REIFE_ALTER){  //vorlagerung der Alters-Frage, um Laufzeit zu verbessern
+			  double gesamtw = (PAARUNGS_WAHRSCHEINLICHKEIT+hunger*0.015);
+			  double Zufall = Math.random();
+			  int Brut;
+			  	if (Zufall<gesamtw){
+			  		Zufall = Math.random(); //neuer Zufallswert, um Anzahl der Kinder festzustellen
+			  		Brut = (int)Math.round(Zufall*MAX_BRUT);
+			  		return Brut;
+			  	}
+			  	else{
+				  	return 0;	  
+				}
+		  } 
+		  else{
+			  	return 0;	  
+		  }
+	  }
+	 
+	  public void fresse(Hase hase){
+		  hase.wirdGetötet();
+	  }
+
 
   /**
    * ÃœberprÃ¼ft, ob sich ein Fuchs fortpflanzen kann. 
    * Gibt als Ergebnis die Anzahl der Kinder zurÃ¼ck (kleiner gleich MAX_BRUT)
    */
-  protected int fortpflanzen() {
-    
-	  // TODO: fehlende Implementierung ergÃ¤nzen (siehe Aufgabe 3)
-    
-    // Voreinstellung: wenn der Fuchs sich nicht fortpflanzen kann, ist das Ergebnis 0
-    return 0;
 
-  }
 
   
   /*******************************
