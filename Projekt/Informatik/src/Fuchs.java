@@ -44,7 +44,7 @@ public class Fuchs extends Tier {
 	  private Image fuchsBild;
 	  
 	  //Je satter der Fuchs, desto niedriger sein Jagdglück um SATT_FAKTOR
-	  private double SATT_FAKTOR = 0.097;
+	  private double SATT_FAKTOR = 0.096;
 	  
 	  /**
 	   * Suche auf dem Feld feld auf den direkt angrenzenden Nachbarpositionen 

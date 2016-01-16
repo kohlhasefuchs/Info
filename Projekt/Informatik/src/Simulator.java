@@ -19,37 +19,34 @@ public class Simulator extends Thread {
 	private static final double KOHL_ERZEUGUNG = 0.02;
 
 	// vielleicht gibt es auch noch JÃ¤ger, die FÃ¼chse jagen
-	private static final double JAEGER_ERZEUGUNG = 0.005;
+	private static double JAEGER_ERZEUGUNG = 0.002;
 
 
 	/**
-	 * BevÃ¶lkere das Feld mit Hasen und FÃ¼chsen und generiere einige Pflanzen
+	 * BevÃ¶lkere das Feld mit Hasen und FÃ¼chsen und generiere einige Pflanzen und Jäger
 	 */
 	private void bevoelkere(Feld feld) {
-		Random random = new Random();
 		feld.clear();
 		
 		//1b
 		double ERZEUGUNG;
 		int height = feld.getHeight();
 		int width = feld.getWidth();
-		int zähler=0;
 		for (int i=0; i<height; i++) {
 			for (int j=0; j<width;j++) {
 				ERZEUGUNG = Math.random();
 				if (ERZEUGUNG<KOHL_ERZEUGUNG){
 					erzeugeKohl(i,j);
-					zähler++;
 				}
 				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG){  //Hase+Kohl, um den Fall abzudecken, dass die kohlwahrscheinlichkeit höher ist als die hasenwahrscheinlichkeit
 					erzeugeHase(i,j);
-					zähler++;
 				}
 				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG+FUCHS_ERZEUGUNG){
 					erzeugeFuchs(i,j);
-					zähler++;
 				}
-				else zähler++;
+				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG+FUCHS_ERZEUGUNG+JAEGER_ERZEUGUNG){
+					erzeugeJaeger(i,j);
+				}
 			}
 		}
 
@@ -72,7 +69,6 @@ public class Simulator extends Thread {
 		double RANDOM_ERZEUGUNG;
 		int height = getHeight();
 		int width = getWidth();
-		int zähler=0;
 		for (int i=0; i<height; i++) {
 			for (int j=0; j<width;j++) {
 				boolean empty= isEmpty(i,j);
@@ -80,15 +76,24 @@ public class Simulator extends Thread {
 				RANDOM_ERZEUGUNG = Math.random();
 				if (empty==true&&good==true&&KOHL_ERZEUGUNG>=RANDOM_ERZEUGUNG){
 					erzeugeKohl(i,j);
-					zähler++;
 				}
+				/*else if (empty==true&&(KOHL_ERZEUGUNG+JAEGER_ERZEUGUNG)>RANDOM_ERZEUGUNG){
+					System.out.println("JÄGER RANDOM   "+RANDOM_ERZEUGUNG);
+					erzeugeJaeger(i,j);
+				}*/
 			}
 		}
-		
-		
-
+	}
+	private void erzeugeJaeger(int zeile, int spalte) {
+		Jaeger jaeger = new Jaeger(true, SimulatorAnzeige.jagdImage);
+		lebewesen.add(jaeger);
+		jaeger.setLocation(zeile, spalte);
+		feld.platziere(jaeger, zeile, spalte);
 	}
 
+	public void setJaegerzahl(double zahl){
+		JAEGER_ERZEUGUNG = zahl;
+	}
 	/*
 	 * **** Ab hier muss am Programmcode nichts geÃ¤ndert werden *****
 	 */ 
@@ -289,6 +294,9 @@ public class Simulator extends Thread {
 
 		feld.addFoxNumber(Fuchs.anzahl);
 		aktualisiertesFeld.addFoxNumber(Fuchs.anzahl);
+		
+		feld.addHunterNumber(Jaeger.anzahl);
+		aktualisiertesFeld.addHunterNumber(Jaeger.anzahl);
 
 
 		improveSoil();
@@ -321,7 +329,7 @@ public class Simulator extends Thread {
 		anzeige.showStatus(
 				schritt,
 				feld,
-				"FÃ¼chse: " + Fuchs.anzahl + " Hasen: " + Hase.anzahl);
+				"Füchse: " + Fuchs.anzahl + " Hasen: " + Hase.anzahl + " Jäger: "+ Jaeger.anzahl);
 
 	}
 
@@ -342,6 +350,7 @@ public class Simulator extends Thread {
 		neueTiere.clear();
 		Fuchs.anzahl = 0;
 		Hase.anzahl = 0;
+		Jaeger.anzahl = 0;
 		if (neueGroesse) {
 			feld = new Feld(hoehe, breite);
 			aktualisiertesFeld = new Feld(hoehe, breite);
@@ -353,7 +362,7 @@ public class Simulator extends Thread {
 		}
 		bevoelkere(feld);
 		schritt = 0;
-		anzeige.showStatus(schritt, feld, "FÃ¼chse: 0, Hasen: 0");
+		anzeige.showStatus(schritt, feld, "Füchse: 0, Hasen: 0, Jäger: 0");
 	}
 
 

@@ -33,15 +33,17 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
 
   private final String STEP_PREFIX = "Schritt: ";
 
-  private final String POPULATION_PREFIX = "BevÃ¶lkerung: ";
+  private final String POPULATION_PREFIX = "Bevölkerung: ";
 
-  private JLabel stepLabel, population, fuchsAnzL, haseAnzL;
+  private JLabel stepLabel, population, fuchsAnzL, haseAnzL, jagdAnzL;
 
   private JTextField anzahlFeld;
 
   private JLabel anzahlLabel;
 
   private JButton startB, stopB, exitB, optionB;
+  
+  private JCheckBox jagdbox;
 
   private OptionFrame optionFrame;
 
@@ -55,7 +57,7 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
 
   protected static Image plantImage;
 
-  protected static Image rabbitImage, foxImage;
+  protected static Image rabbitImage, foxImage, jagdImage;
 
   protected static Image StdImage;
 
@@ -77,12 +79,15 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
     setTitle("Hase und Fuchs Simulation");
     stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
     population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
-    JLabel fuchsL = new JLabel("FÃ¼chse");
+    JLabel fuchsL = new JLabel("Füchse:");
     fuchsAnzL = new JLabel("      ");
     fuchsAnzL.setForeground(Color.red);
-    JLabel haseL = new JLabel("Hasen");
+    JLabel haseL = new JLabel("Hasen:");
     haseAnzL = new JLabel("     ");
     haseAnzL.setForeground(Color.darkGray);
+    JLabel jagdL = new JLabel("Jäger:");
+    jagdAnzL = new JLabel("      ");
+    jagdAnzL.setForeground(Color.blue);
 
     setLocation(100, 50);
 
@@ -117,6 +122,8 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
     popView.add(fuchsAnzL);
     popView.add(haseL);
     popView.add(haseAnzL);
+    popView.add(jagdL);
+    popView.add(jagdAnzL);
 
     grid.setConstraints(popView, c);
     bottom.add(popView);
@@ -127,6 +134,7 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
     c.ipady = 0;
     
     anzahlLabel = new JLabel("Anzahl der Simulationsschritte");
+    jagdbox = new JCheckBox("Jäger?", true);
     startB = new JButton("Start");
     startB.addActionListener(this);
     stopB = new JButton("Stop");
@@ -155,6 +163,7 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
     anzahlFeld = new JTextField(3);
     anzahlFeld.setText("100");
     bSouth.add(anzahlFeld);
+    bSouth.add(jagdbox);
     bSouth.add(startB);
     bSouth.add(stopB);
     bSouth.add(waitSlider);
@@ -175,10 +184,12 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
       plantImage = tk.getImage("pflanze.jpg");
       rabbitImage = tk.getImage("hase.jpg");
       foxImage = tk.getImage("fuchs.jpg");
+      jagdImage = tk.getImage("jagd.png");
       MediaTracker tracker = new MediaTracker(this);
       tracker.addImage(plantImage, 0);
       tracker.addImage(rabbitImage, 1);
       tracker.addImage(foxImage, 2);
+      tracker.addImage(jagdImage, 3);
       tracker.waitForID(0);
       tracker.waitForID(1);
       tracker.waitForID(2);
@@ -237,6 +248,13 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
     }
     haseAnzL.setText("" + hn);
 
+    Vector<Integer> janzahl = feld.getHunterNumbers();
+    int jn = 0;
+    if (janzahl != null && janzahl.size() > 0) {
+      jn = janzahl.lastElement().intValue();
+    }
+    jagdAnzL.setText("" + jn);
+    
     fieldView.repaint();
 
     pview.setFeld(feld);
@@ -411,6 +429,16 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
           x1 = (int) (k * (i + 1));
           y1 = yZero - fanzahl.get(i) / scale;
         }
+        Vector<Integer> janzahl = feld.getHunterNumbers();
+        x1 = 0;
+        y1 = 0;
+        for (int i = 0; i < janzahl.size(); i++) {
+          g.setColor(Color.BLUE);
+          g.drawLine(x1, y1, (int) (k * (i + 1)), yZero
+              - janzahl.get(i) / scale);
+          x1 = (int) (k * (i + 1));
+          y1 = yZero - janzahl.get(i) / scale;
+        }
       }
     }
 
@@ -459,7 +487,7 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
       fBreite = new JTextField(3);
       fBreite.setText(""+simulator.getWidth());
       feldOpt.add(fBreite);
-      JLabel feldH = new JLabel("HÃ¶he");
+      JLabel feldH = new JLabel("Höhe");
       feldOpt.add(feldH);
       fHoehe = new JTextField(3);
       fHoehe.setText(""+simulator.getHeight());
@@ -467,7 +495,7 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
 
       Hashtable zoomLabels = new Hashtable();
       zoomLabels.put(5, new JLabel("klein"));
-      zoomLabels.put(25, new JLabel("groÃŸ"));
+      zoomLabels.put(25, new JLabel("groß"));
 
       zoom = new JSlider(5, 25, 15);
       zoom.setPaintTicks(false);
@@ -517,7 +545,7 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
       hasePaar = new JTextField(3);
       hasePaar.setText(""+Hase.PAARUNGS_WAHRSCHEINLICHKEIT);
       haseOpt.add(hasePaar);
-      JLabel maxKids = new JLabel("maximale WurfgrÃ¶ÃŸe:");
+      JLabel maxKids = new JLabel("maximale Wurfgröße:");
       haseOpt.add(maxKids);
       haseWurf = new JTextField(3);
       haseWurf.setText(""+Hase.MAX_BRUT);
@@ -544,7 +572,7 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
       fuchsPaar = new JTextField(3);
       fuchsPaar.setText(""+Fuchs.PAARUNGS_WAHRSCHEINLICHKEIT);
       fuchsOpt.add(fuchsPaar);
-      JLabel maxKidsF = new JLabel("maximale WurfgrÃ¶ÃŸe:");
+      JLabel maxKidsF = new JLabel("maximale Wurfgröße:");
       fuchsOpt.add(maxKidsF);
       fuchsWurf = new JTextField(3);
       fuchsWurf.setText(""+Fuchs.MAX_BRUT);
@@ -617,6 +645,14 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
       try {
         schritte = Integer.parseInt(anzahlFeld.getText());
       } catch (Exception e) {
+      }
+      //-----FD-----
+      //Checkbox für Jäger-Spawn
+      if (jagdbox.isSelected()==false){
+    	  simulator.setJaegerzahl(0);
+      }
+      else if (jagdbox.isSelected()==true){
+    	  simulator.setJaegerzahl(0.002);
       }
       // simulator = new Simulator(60,90);
       simulator.setSchrittZahl(schritte);

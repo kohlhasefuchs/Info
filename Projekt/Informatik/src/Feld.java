@@ -27,6 +27,7 @@ public class Feld {
 	private Vector<Integer> numberOfPlants;
 	private Vector<Integer> numberOfRabbits;
 	private Vector<Integer> numberOfFox;
+	private Vector<Integer> numberOfHunter;
 
 	/**
 	 * Repräsentiert ein Feld der gegebenen Dimension.
@@ -49,6 +50,7 @@ public class Feld {
 		numberOfPlants = new Vector<Integer>();
 		numberOfRabbits = new Vector<Integer>();
 		numberOfFox = new Vector<Integer>();
+		numberOfHunter = new Vector<Integer>();
 	}
 
 	protected void addPlantNumber(int n) {
@@ -73,6 +75,14 @@ public class Feld {
 
 	protected Vector<Integer> getFoxNumbers() {
 		return numberOfFox;
+	}
+	
+	protected void addHunterNumber(int n) {
+		numberOfHunter.add(new Integer(n));
+	}
+
+	protected Vector<Integer> getHunterNumbers() {
+		return numberOfHunter;
 	}
 
 	protected boolean goodSoil(int i, int j) {
@@ -119,6 +129,7 @@ public class Feld {
 		 numberOfPlants = new Vector<Integer>();
 		 numberOfRabbits = new Vector<Integer>();
 		 numberOfFox = new Vector<Integer>();
+		 numberOfHunter = new Vector<Integer>();
 	 }
 
 	 protected boolean istLeer(int zeile, int spalte) {
