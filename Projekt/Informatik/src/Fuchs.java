@@ -44,7 +44,7 @@ public class Fuchs extends Tier {
 	  private Image fuchsBild;
 	  
 	  //Je satter der Fuchs, desto niedriger sein Jagdglück um SATT_FAKTOR
-	  private double SATT_FAKTOR = 0.096;
+	  private double SATT_FAKTOR = 0.005;
 	  
 	  /**
 	   * Suche auf dem Feld feld auf den direkt angrenzenden Nachbarpositionen 
@@ -72,7 +72,7 @@ public class Fuchs extends Tier {
 						  Hase hase = getHase(feld, loc);
 						  double jagdw = Math.random();
 						  hunger = getHunger();
-						  if (hase.istLebendig()&&jagdw<(JAGD_WAHRSCHEINLICHKEIT-hunger*SATT_FAKTOR)) {
+						  if (hase.istLebendig()&&hase.istgetötet()==false&&jagdw<(JAGD_WAHRSCHEINLICHKEIT-hunger*SATT_FAKTOR)) {
 							  fresse(hase);
 							  setSatt(getHunger() + HASEN_FUTTER);
 							  return loc;
@@ -80,7 +80,6 @@ public class Fuchs extends Tier {
 					  }
 				  }			
 			  }
-		  
 		  // falls kein Hase gefunden wird, dann gebe null zurück  
 		  return null;
 	  }
@@ -95,7 +94,7 @@ public class Fuchs extends Tier {
 		  int alter = getAlter();
 		  int hunger = getHunger();
 		  if(alter>REIFE_ALTER){  //vorlagerung der Alters-Frage, um Laufzeit zu verbessern
-			  double gesamtw = (PAARUNGS_WAHRSCHEINLICHKEIT+hunger*0.015);
+			  double gesamtw = (PAARUNGS_WAHRSCHEINLICHKEIT+hunger*0.075);
 			  double Zufall = Math.random();
 			  int Brut;
 			  	if (Zufall<gesamtw){

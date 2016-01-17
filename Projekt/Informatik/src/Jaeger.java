@@ -41,7 +41,7 @@ public class Jaeger extends Tier {
 	  private Image jagdBild;
 	  
 	  //Je älter der Jäger, desto erfahrener ist er und desto höher seine Jagd-Wahrscheinlichkeit
-	  private double ALTER_FAKTOR = 0.0021;
+	  private double ALTER_FAKTOR = 0.0035;
 	  
 	  /**
 	   * Suche auf dem Feld feld auf den direkt angrenzenden Nachbarpositionen 
@@ -101,8 +101,7 @@ public class Jaeger extends Tier {
 		  }
 	  	}
 	 
-	  public void jage(Tier tier){
-		  
+	  public void jage(Tier tier){ 
 		  tier.wirdGetötet();
 	  }
 
@@ -176,17 +175,17 @@ public class Jaeger extends Tier {
   }
   
   /**
-   * Steht auf dem Feld f auf Position loc ein Hase?
+   * Steht auf dem Feld f auf Position loc ein Tier?
    */
   private boolean stehtTier(Feld feld, Location loc) {
     Object objekt = feld.getObjektAt(loc.getRow(), loc.getCol());
     if (objekt instanceof Hase){
     	return (objekt instanceof Hase);
     }
-    else{
+    else if (objekt instanceof Fuchs){
     	return (objekt instanceof Fuchs);
     }
-    
+    else return false;
   } 
   
   /**

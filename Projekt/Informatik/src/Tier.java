@@ -22,17 +22,17 @@ public abstract class Tier extends PositionsObjekt implements Lebewesen {
 	public void run(Feld altesFeld, Feld neuesFeld, HashMap neueTiere) {
 		erhoeheAlter();
 		erhoeheHunger();
-		if (istLebendig()){		
-			if (getLocation()!=null){  //TODO remove! Hier wird der fehler abgefangen, läuft trotzdem!
+		if (istLebendig()&&getötet==false){		 //es wird überprüft, ob das Tier am leben ist, und ob es nicht bereits durch ein anderes Tier getötet wurde
+			if (getLocation()!=null){  // Es gab einen Fehler, dass Hasen keine Location besitzen. Hier wird der Fehler abgefangen
 				sucheFressen(altesFeld);
-				if (fressenGefunden()){
+				if (fressenGefunden()){			//wenn Fressen gefunden wird, kann das Fressen gefressen werden
 					geheZumFressen(neuesFeld);
 				}
 				else {
-					geheNaechstesFreiesFeld(neuesFeld, getLocation());
+					geheNaechstesFreiesFeld(neuesFeld, getLocation()); //ansonsten geht des Tier auf das nächste freie Feld
 				}
-				int fortpflanzen = fortpflanzen();
-				if (fortpflanzen>0){
+				int fortpflanzen = fortpflanzen();   //ermittelt mit der Methode fortpflanzen(), ob und wenn ja, wie viele Nachkommen gezeugt werden
+				if (fortpflanzen>0){				//fortpflanzen ist ein Wert zwischen 0 und MAX_BRUT des jeweiligen Tieres
 					while (fortpflanzen>0){
 						erzeugeTier(neueTiere);
 						fortpflanzen--;			//fortpflanzen ist eine zahl zwischen 0 und MAX_BRUT der klasse Hase/Fuchs und gibt die anzahl der geburten an
@@ -45,6 +45,9 @@ public abstract class Tier extends PositionsObjekt implements Lebewesen {
 	//Tier wird gejagt/erlegt von JÃ¤ger/Fuchs
 	public void wirdGetötet() {
 		getötet = true;
+	}
+	public boolean istgetötet(){
+		return getötet;
 	}
 
   

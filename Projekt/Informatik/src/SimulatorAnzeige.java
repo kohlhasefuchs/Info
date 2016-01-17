@@ -134,7 +134,7 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
     c.ipady = 0;
     
     anzahlLabel = new JLabel("Anzahl der Simulationsschritte");
-    jagdbox = new JCheckBox("Jäger?", true);
+    jagdbox = new JCheckBox("Jäger?", false);
     startB = new JButton("Start");
     startB.addActionListener(this);
     stopB = new JButton("Stop");
