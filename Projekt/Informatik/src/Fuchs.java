@@ -3,14 +3,14 @@ import java.awt.Image;
 import java.util.Random;
 
 /**
- * Die Klasse der Füchse. Jeder Fuchs ist ein Tier.
+ * Die Klasse der FÃ¼chse. Jeder Fuchs ist ein Tier.
  * 
- * @author Frank Leßke / C. Brand
+ * @author Frank LeÃŸke / C. Brand
  */
 public class Fuchs extends Tier {
   
   /* 
-   * Eigenschaften aller Füchse (statische Felder) 
+   * Eigenschaften aller FÃ¼chse (statische Felder) 
    ****************************************************/
   
   // das Alter, ab dem sich ein Fuchs fortpflanzen kann
@@ -28,7 +28,7 @@ public class Fuchs extends Tier {
 	  // wieviel Essenspunkte bringt das Verzehren eines Hasens
 	  private static int HASEN_FUTTER = 3;
 	  
-	  // Gesamtzahl der F�chse
+	  // Gesamtzahl der Füchse
 	  public static int anzahl = 0;
 	  
 	  // die generelle Fuchs-Jagdwahrscheinlichkeit 
@@ -43,36 +43,36 @@ public class Fuchs extends Tier {
 	  // das anzuzeigende Bild
 	  private Image fuchsBild;
 	  
-	  //Je satter der Fuchs, desto niedriger sein Jagdgl�ck um SATT_FAKTOR
+	  //Je satter der Fuchs, desto niedriger sein Jagdglück um SATT_FAKTOR
 	  private double SATT_FAKTOR = 0.005;
 	  
 	  /**
 	   * Suche auf dem Feld feld auf den direkt angrenzenden Nachbarpositionen 
 	   * zur Position des Fuchses nach etwas zum Fressen.
-	   * F�chse fressen Hasen. Wenn ein Hase gefunden wird, so wird dieser get�tet und verspeist.
-	   * Allerdings h�ngt das Jagdgl�ck auch etwas vom Zufall ab.
-	   * Als Ergebnis wird die Position des Hasens zur�ckgegeben.
+	   * Füchse fressen Hasen. Wenn ein Hase gefunden wird, so wird dieser getötet und verspeist.
+	   * Allerdings hängt das Jagdglück auch etwas vom Zufall ab.
+	   * Als Ergebnis wird die Position des Hasens zurückgegeben.
 	   */
 	  protected Location findeFressen(Feld feld) {
 		  int hunger;
-		  // TODO: fehlende Implementierung erg�nzen (siehe Aufgabe 3)
+		  // TODO: fehlende Implementierung ergänzen (siehe Aufgabe 3)
 		// durchsuche alle Nachbarpositionen
 			  for (int i = 0; i < 8; i++) {
 				  
-				  // pr�fe ob Nachbar noch innerhalb des Feldes liegt
+				  // prüfe ob Nachbar noch innerhalb des Feldes liegt
 				  if (liegtAufFeld(feld, i)) {
 					  
 					  // Hole Nachbar-Position
 					  Location loc = getNachbarPosition(feld, i);
 					  
-					  // pr�fe ob darauf ein hase steht
+					  // prüfe ob darauf ein hase steht
 					  if (stehtHase(feld, loc)) {
 						  
-						  // hole den Hasen und pr�fe, ob dieser essbar ist
+						  // hole den Hasen und prüfe, ob dieser essbar ist, bzw lebendig ist
 						  Hase hase = getHase(feld, loc);
 						  double jagdw = Math.random();
 						  hunger = getHunger();
-						  if (hase.istLebendig()&&hase.istget�tet()==false&&jagdw<(JAGD_WAHRSCHEINLICHKEIT-hunger*SATT_FAKTOR)) {
+						  if (hase.istLebendig()&&hase.istgetötet()==false&&jagdw<(JAGD_WAHRSCHEINLICHKEIT-hunger*SATT_FAKTOR)) {
 							  fresse(hase);
 							  setSatt(getHunger() + HASEN_FUTTER);
 							  return loc;
@@ -80,17 +80,17 @@ public class Fuchs extends Tier {
 					  }
 				  }			
 			  }
-		  // falls kein Hase gefunden wird, dann gebe null zur�ck  
+		  // falls kein Hase gefunden wird, dann gebe null zurück  
 		  return null;
 	  }
 
 	  /**
-	   * �berpr�ft, ob sich ein Fuchs fortpflanzen kann. 
-	   * Gibt als Ergebnis die Anzahl der Kinder zur�ck (kleiner gleich MAX_BRUT)
+	   * Überprüft, ob sich ein Fuchs fortpflanzen kann. 
+	   * Gibt als Ergebnis die Anzahl der Kinder zurück (kleiner gleich MAX_BRUT)
 	   */
 	  protected int fortpflanzen() {
 	    
-		  // TODO: fehlende Implementierung erg�nzen (siehe Aufgabe 3)
+		  // TODO: fehlende Implementierung ergänzen (siehe Aufgabe 3)
 		  int alter = getAlter();
 		  int hunger = getHunger();
 		  if(alter>REIFE_ALTER){  //vorlagerung der Alters-Frage, um Laufzeit zu verbessern
@@ -112,25 +112,25 @@ public class Fuchs extends Tier {
 	  }
 	 
 	  public void fresse(Hase hase){
-		  hase.wirdGet�tet();
+		  hase.wirdGetötet();
 	  }
 
 
   /**
-   * Überprüft, ob sich ein Fuchs fortpflanzen kann. 
-   * Gibt als Ergebnis die Anzahl der Kinder zurück (kleiner gleich MAX_BRUT)
+   * ÃœberprÃ¼ft, ob sich ein Fuchs fortpflanzen kann. 
+   * Gibt als Ergebnis die Anzahl der Kinder zurÃ¼ck (kleiner gleich MAX_BRUT)
    */
 
 
   
   /*******************************
-   * Ab hier muss der Programmcode nicht mehr verändert werden.
+   * Ab hier muss der Programmcode nicht mehr verÃ¤ndert werden.
    *****************/
   
   
   /**
    * Erzeuge einen neuen Fuchs. Ein Fuchs kann entweder mit dem Alter = 0
-   * erzeugt werden (bei der Geburt), oder mit einem zufälligen Alter (bei
+   * erzeugt werden (bei der Geburt), oder mit einem zufÃ¤lligen Alter (bei
    * Beginn der Simulation)
    * 
    * @param zufallsAlter
@@ -201,7 +201,7 @@ public class Fuchs extends Tier {
     if (objekt instanceof Hase)
       return (Hase)objekt;
     else {
-      System.out.println("Sie sollten erst überprüfen, ob an der Position auch wirklich ein Hase steht");
+      System.out.println("Sie sollten erst Ã¼berprÃ¼fen, ob an der Position auch wirklich ein Hase steht");
       System.out.println("Die Simulation wird jetzt beendet.");
       System.exit(0);
     }
@@ -209,7 +209,7 @@ public class Fuchs extends Tier {
   }
   
   /**
-   * Welches Bild wird für den Fuchs verwendet?
+   * Welches Bild wird fÃ¼r den Fuchs verwendet?
    */
   public Image getImage() {
     return fuchsBild;
