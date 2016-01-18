@@ -77,10 +77,10 @@ public class Simulator extends Thread {
 				if (empty==true&&good==true&&KOHL_ERZEUGUNG>=RANDOM_ERZEUGUNG){
 					erzeugeKohl(i,j);
 				}
-				/*else if (empty==true&&(KOHL_ERZEUGUNG+JAEGER_ERZEUGUNG)>RANDOM_ERZEUGUNG){
+				else if (empty==true&&(KOHL_ERZEUGUNG+JAEGER_ERZEUGUNG)>RANDOM_ERZEUGUNG){
 					System.out.println("JÄGER RANDOM   "+RANDOM_ERZEUGUNG);
 					erzeugeJaeger(i,j);
-				}*/
+				}
 			}
 		}
 	}
@@ -164,7 +164,7 @@ public class Simulator extends Thread {
 		hase.setLocation(zeile, spalte);
 		feld.platziere(hase, zeile, spalte);
 	}
-
+	
 	/**
 	 * Konstruktor fÃ¼r die Klasse Simulator
 	 */

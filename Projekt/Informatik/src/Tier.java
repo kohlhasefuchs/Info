@@ -17,12 +17,12 @@ public abstract class Tier extends PositionsObjekt implements Lebewesen {
    * Faktor fort.
    */
 	
-	private boolean getötet = false;
+	private boolean getoetet = false;
 
 	public void run(Feld altesFeld, Feld neuesFeld, HashMap neueTiere) {
 		erhoeheAlter();
 		erhoeheHunger();
-		if (istLebendig()&&getötet==false){		 //es wird überprüft, ob das Tier am leben ist, und ob es nicht bereits durch ein anderes Tier getötet wurde
+		if (istLebendig()&&getoetet==false){		 //es wird überprüft, ob das Tier am leben ist, und ob es nicht bereits durch ein anderes Tier getötet wurde
 			if (getLocation()!=null){  // Es gab einen Fehler, dass Hasen keine Location besitzen. Hier wird der Fehler abgefangen
 				sucheFressen(altesFeld);
 				if (fressenGefunden()){			//wenn Fressen gefunden wird, kann das Fressen gefressen werden
@@ -43,11 +43,11 @@ public abstract class Tier extends PositionsObjekt implements Lebewesen {
 	}
 	
 	//Tier wird gejagt/erlegt von JÃ¤ger/Fuchs
-	public void wirdGetötet() {
-		getötet = true;
+	public void wirdGetoetet() {
+		getoetet = true;
 	}
-	public boolean istgetötet(){
-		return getötet;
+	public boolean istgetoetet(){
+		return getoetet;
 	}
 
   

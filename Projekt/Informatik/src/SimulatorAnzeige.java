@@ -184,7 +184,7 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
       plantImage = tk.getImage("pflanze.jpg");
       rabbitImage = tk.getImage("hase.jpg");
       foxImage = tk.getImage("fuchs.jpg");
-      jagdImage = tk.getImage("jagd.png");
+      jagdImage = tk.getImage("jagd.jpg");
       MediaTracker tracker = new MediaTracker(this);
       tracker.addImage(plantImage, 0);
       tracker.addImage(rabbitImage, 1);

@@ -17,7 +17,7 @@ public class Jaeger extends Tier {
 	  private static final int JAGD_ALTER = 10;
 	  
 	  // die maximale Lebendauer von einem Jäger
-	  static int MAX_ALTER = 120;
+	  static int MAX_ALTER = 80;
 	  
 	  // wieviel Überlebenspunkte (nicht nur Futter, es wären eher Felle...) erhält der Jäger für Hasen, bzw. Füchse
 	  private static int TIER_LEBEN = 4;
@@ -102,7 +102,7 @@ public class Jaeger extends Tier {
 	  	}
 	 
 	  public void jage(Tier tier){ 
-		  tier.wirdGetötet();
+		  tier.wirdGetoetet();
 	  }
 
 

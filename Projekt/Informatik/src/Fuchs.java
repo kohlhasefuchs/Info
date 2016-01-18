@@ -72,7 +72,7 @@ public class Fuchs extends Tier {
 						  Hase hase = getHase(feld, loc);
 						  double jagdw = Math.random();
 						  hunger = getHunger();
-						  if (hase.istLebendig()&&hase.istgetötet()==false&&jagdw<(JAGD_WAHRSCHEINLICHKEIT-hunger*SATT_FAKTOR)) {
+						  if (hase.istLebendig()&&hase.istgetoetet()==false&&jagdw<(JAGD_WAHRSCHEINLICHKEIT-hunger*SATT_FAKTOR)) {
 							  fresse(hase);
 							  setSatt(getHunger() + HASEN_FUTTER);
 							  return loc;
@@ -112,7 +112,7 @@ public class Fuchs extends Tier {
 	  }
 	 
 	  public void fresse(Hase hase){
-		  hase.wirdGetötet();
+		  hase.wirdGetoetet();
 	  }
 
 
