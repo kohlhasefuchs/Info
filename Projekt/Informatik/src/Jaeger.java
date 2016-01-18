@@ -3,67 +3,67 @@ import java.awt.Image;
 import java.util.Random;
 
 /**
- * Die Klasse der FÃ¼chse. Jeder Fuchs ist ein Tier.
+ * Die Klasse der Jaeger. Jeder Jaeger ist (angenommen) ein Tier.
  * 
  * @author Frank LeÃŸke / C. Brand
  */
 public class Jaeger extends Tier {
   
   /* 
-   * Eigenschaften aller Jäger (statische Felder) 
+   * Eigenschaften aller Jaeger (statische Felder) 
    ****************************************************/
   
-  // das Alter, ab dem ein Jäger in der Ausbildung anfängt, zu erschießen
+  // das Alter, ab dem ein Jaeger in der Ausbildung anfaengt, zu erschießen
 	  private static final int JAGD_ALTER = 10;
 	  
-	  // die maximale Lebendauer von einem Jäger
-	  static int MAX_ALTER = 80;
+	  // die maximale Lebendauer von einem Jaeger
+	  static int MAX_ALTER = 110;
 	  
-	  // wieviel Überlebenspunkte (nicht nur Futter, es wären eher Felle...) erhält der Jäger für Hasen, bzw. Füchse
+	  // wieviel ueberlebenspunkte (nicht nur Futter, es waeren eher Felle...) erhaelt der Jaeger fuer Hasen, bzw. Fuechse
 	  private static int TIER_LEBEN = 4;
 	  
-	  // Gesamtzahl der Jäger
+	  // Gesamtzahl der Jaeger
 	  public static int anzahl = 0;
 	  
-	  // die generelle Jäger-Jagdwahrscheinlichkeit 
+	  // die generelle Jaeger-Jagdwahrscheinlichkeit 
 	  static double JAGD_WAHRSCHEINLICHKEIT = 0.05;
 	  
-	  //Wahrscheinlichkeit, dass ein Jäger einen anderen, neuen Jäger ausbildet
+	  //Wahrscheinlichkeit, dass ein Jaeger einen anderen, neuen Jaeger ausbildet
 	  static double AZUBI_WAHRSCHEINLICHKEIT = 0.005;
 
-	  //random für erzeugung
+	  //random fuer erzeugung
 	  private static final Random random = new Random();
 	  
-	  // die Jagdwahrscheinlichkeit (eines einzelnen Jägers)
+	  // die Jagdwahrscheinlichkeit (eines einzelnen Jaegers)
 	  double jagdWahrsch;
 	  
 	  // das anzuzeigende Bild
 	  private Image jagdBild;
 	  
-	  //Je älter der Jäger, desto erfahrener ist er und desto höher seine Jagd-Wahrscheinlichkeit
+	  //Je aelter der Jaeger, desto erfahrener ist er und desto hoeher seine Jagd-Wahrscheinlichkeit
 	  private double ALTER_FAKTOR = 0.0035;
 	  
 	  /**
 	   * Suche auf dem Feld feld auf den direkt angrenzenden Nachbarpositionen 
 	   * zur Position des Fuchses nach etwas zum Fressen.
-	   * Füchse fressen Hasen. Wenn ein Hase gefunden wird, so wird dieser getötet und verspeist.
-	   * Allerdings hängt das Jagdglück auch etwas vom Zufall ab.
-	   * Als Ergebnis wird die Position des Hasens zurückgegeben.
+	   * Fuechse fressen Hasen. Wenn ein Hase gefunden wird, so wird dieser getoetet und verspeist.
+	   * Allerdings haengt das Jagdglueck auch etwas vom Zufall ab.
+	   * Als Ergebnis wird die Position des Hasens zurueckgegeben.
 	   */
 	  protected Location findeFressen(Feld feld) { //beibehalten des Methoden-Namens aufgrund der run-Methode
 		  int alter;
 		// durchsuche alle Nachbarpositionen
 			  for (int i = 0; i < 8; i++) {
-				  // prüfe ob Nachbar noch innerhalb des Feldes liegt
+				  // pruefe ob Nachbar noch innerhalb des Feldes liegt
 				  if (liegtAufFeld(feld, i)) {
 					  
 					  // Hole Nachbar-Position
 					  Location loc = getNachbarPosition(feld, i);
 					  
-					  // prüfe ob darauf ein hase steht
+					  // pruefe ob darauf ein hase steht
 					  if (stehtTier(feld, loc)) {
 						  
-						  // hole das Tier und prüfe
+						  // hole das Tier und pruefe
 						  Tier tier = getTier(feld, loc);
 						  double jagdw = Math.random();
 						  alter = getAlter();
@@ -76,14 +76,14 @@ public class Jaeger extends Tier {
 				  }			
 			  }
 		  
-		  // falls kein Tier gefunden wird, dann gebe null zurück  
+		  // falls kein Tier gefunden wird, dann gebe null zurueck  
 		  return null;
 	  }
 
-	  //Jäger pflanzen sich nicht fort, sie kommen einfach!
+	  //Jaeger pflanzen sich nicht fort, sie kommen einfach!
 	  protected int fortpflanzen() {
 		  int alter = getAlter();
-		  if(alter>JAGD_ALTER){  //Nur jäger, die auch schon jagen können andere Jäger ausbilden
+		  if(alter>JAGD_ALTER){  //Nur jaeger, die auch schon jagen koennen andere Jaeger ausbilden
 			  double gesamtw = (AZUBI_WAHRSCHEINLICHKEIT+alter*ALTER_FAKTOR);
 			  double Zufall = Math.random();
 			  int Brut;

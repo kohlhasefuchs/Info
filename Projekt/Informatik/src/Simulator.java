@@ -23,7 +23,7 @@ public class Simulator extends Thread {
 
 
 	/**
-	 * Bev√∂lkere das Feld mit Hasen und F√ºchsen und generiere einige Pflanzen und J‰ger
+	 * Bev√∂lkere das Feld mit Hasen und F√ºchsen und generiere einige Pflanzen und Jaeger
 	 */
 	private void bevoelkere(Feld feld) {
 		feld.clear();
@@ -38,14 +38,14 @@ public class Simulator extends Thread {
 					erzeugeKohl(i,j);
 				}
 				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG){  //Hase+Kohl, um den Fall abzudecken, dass die Kohl-Wahrscheinlichkeit 
-					erzeugeHase(i,j);								//hˆher ist als die Hase-Wahrscheinlichkeit
+					erzeugeHase(i,j);								//hoeher ist als die Hase-Wahrscheinlichkeit
 				}
 				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG+FUCHS_ERZEUGUNG){	//Hase+Kohl+Fuchs, um den Fall abzudecken, dass die Kohl+Hase-Wahrscheinlichkeit
-					erzeugeFuchs(i,j);												//hˆher ist als die Fuchs-Wahrscheinlichkeit
+					erzeugeFuchs(i,j);												//hoeher ist als die Fuchs-Wahrscheinlichkeit
 				}
-				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG+FUCHS_ERZEUGUNG+JAEGER_ERZEUGUNG){ //Hase+Kohl+Fuchs+ J‰ger, um den Fall abzudecken, dass die 
-					erzeugeJaeger(i,j);																//Kohl+Hase+Fuchs-Wahrscheinlichkeit hˆher ist als die 
-				}																					// J‰ger-Wahrscheinlichkeit
+				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG+FUCHS_ERZEUGUNG+JAEGER_ERZEUGUNG){ //Hase+Kohl+Fuchs+ Jaeger, um den Fall abzudecken, dass die 
+					erzeugeJaeger(i,j);																//Kohl+Hase+Fuchs-Wahrscheinlichkeit hoeher ist als die 
+				}																					// Jaeger-Wahrscheinlichkeit
 			}
 		}
 
@@ -72,7 +72,7 @@ public class Simulator extends Thread {
 			}
 		}
 	}
-	private void erzeugeJaeger(int zeile, int spalte) {			// erzeugt einen J‰ger, Methode wird in Bevˆlkere abgerufen
+	private void erzeugeJaeger(int zeile, int spalte) {			// erzeugt einen Jaeger, Methode wird in bevoelkere abgerufen
 		Jaeger jaeger = new Jaeger(true, SimulatorAnzeige.jagdImage);
 		lebewesen.add(jaeger);
 		jaeger.setLocation(zeile, spalte);
@@ -317,7 +317,7 @@ public class Simulator extends Thread {
 		anzeige.showStatus(
 				schritt,
 				feld,
-				"F¸chse: " + Fuchs.anzahl + " Hasen: " + Hase.anzahl + " J‰ger: "+ Jaeger.anzahl);
+				"F¸chse: " + Fuchs.anzahl + " Hasen: " + Hase.anzahl + " Jaeger: "+ Jaeger.anzahl);
 
 	}
 

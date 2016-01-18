@@ -44,8 +44,8 @@ public class Hase extends Tier {
   
   
   /**
-   * Überprüft, ob sich ein Hase fortpflanzen kann. 
-   * Gibt als Ergebnis die Anzahl der Kinder zurück (kleiner gleich MAX_BRUT)
+   * ueberprueft, ob sich ein Hase fortpflanzen kann. 
+   * Gibt als Ergebnis die Anzahl der Kinder zurueck (kleiner gleich MAX_BRUT)
    */
   protected int fortpflanzen() {
     
