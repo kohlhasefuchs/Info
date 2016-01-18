@@ -55,7 +55,6 @@ public class Fuchs extends Tier {
 	   */
 	  protected Location findeFressen(Feld feld) {
 		  int hunger;
-		  // TODO: fehlende Implementierung ergänzen (siehe Aufgabe 3)
 		// durchsuche alle Nachbarpositionen
 			  for (int i = 0; i < 8; i++) {
 				  
@@ -89,8 +88,7 @@ public class Fuchs extends Tier {
 	   * Gibt als Ergebnis die Anzahl der Kinder zurück (kleiner gleich MAX_BRUT)
 	   */
 	  protected int fortpflanzen() {
-	    
-		  // TODO: fehlende Implementierung ergänzen (siehe Aufgabe 3)
+	 
 		  int alter = getAlter();
 		  int hunger = getHunger();
 		  if(alter>REIFE_ALTER){  //vorlagerung der Alters-Frage, um Laufzeit zu verbessern

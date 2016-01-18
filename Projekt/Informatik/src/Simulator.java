@@ -28,7 +28,6 @@ public class Simulator extends Thread {
 	private void bevoelkere(Feld feld) {
 		feld.clear();
 		
-		//1b
 		double ERZEUGUNG;
 		int height = feld.getHeight();
 		int width = feld.getWidth();
@@ -38,15 +37,15 @@ public class Simulator extends Thread {
 				if (ERZEUGUNG<KOHL_ERZEUGUNG){
 					erzeugeKohl(i,j);
 				}
-				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG){  //Hase+Kohl, um den Fall abzudecken, dass die kohlwahrscheinlichkeit höher ist als die hasenwahrscheinlichkeit
-					erzeugeHase(i,j);
+				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG){  //Hase+Kohl, um den Fall abzudecken, dass die Kohl-Wahrscheinlichkeit 
+					erzeugeHase(i,j);								//höher ist als die Hase-Wahrscheinlichkeit
 				}
-				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG+FUCHS_ERZEUGUNG){
-					erzeugeFuchs(i,j);
+				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG+FUCHS_ERZEUGUNG){	//Hase+Kohl+Fuchs, um den Fall abzudecken, dass die Kohl+Hase-Wahrscheinlichkeit
+					erzeugeFuchs(i,j);												//höher ist als die Fuchs-Wahrscheinlichkeit
 				}
-				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG+FUCHS_ERZEUGUNG+JAEGER_ERZEUGUNG){
-					erzeugeJaeger(i,j);
-				}
+				else if (ERZEUGUNG<HASE_ERZEUGUNG+KOHL_ERZEUGUNG+FUCHS_ERZEUGUNG+JAEGER_ERZEUGUNG){ //Hase+Kohl+Fuchs+ Jäger, um den Fall abzudecken, dass die 
+					erzeugeJaeger(i,j);																//Kohl+Hase+Fuchs-Wahrscheinlichkeit höher ist als die 
+				}																					// Jäger-Wahrscheinlichkeit
 			}
 		}
 
@@ -57,7 +56,7 @@ public class Simulator extends Thread {
 	/**
 	 * Erzeuge zufÃ¤llig neue Pflanzen auf freie Felder mit guter Erde.
 	 */
-	private void erzeugePflanzen() {		
+	private void erzeugePflanzen() {		// erzeugt einen Kohl, wenn das Feld frei ist und die Erde gesund
 		
 		double RANDOM_ERZEUGUNG;
 		int height = getHeight();
@@ -73,7 +72,7 @@ public class Simulator extends Thread {
 			}
 		}
 	}
-	private void erzeugeJaeger(int zeile, int spalte) {
+	private void erzeugeJaeger(int zeile, int spalte) {			// erzeugt einen Jäger, Methode wird in Bevölkere abgerufen
 		Jaeger jaeger = new Jaeger(true, SimulatorAnzeige.jagdImage);
 		lebewesen.add(jaeger);
 		jaeger.setLocation(zeile, spalte);

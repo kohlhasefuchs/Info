@@ -639,7 +639,6 @@ public class SimulatorAnzeige extends JFrame implements ActionListener,
   }
 
   public void actionPerformed(ActionEvent arg0) {
-    // TODO Auto-generated method stub
     if (arg0.getSource() == startB) {
       schritte = 100;
       try {
