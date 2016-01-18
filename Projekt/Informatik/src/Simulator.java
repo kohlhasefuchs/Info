@@ -317,7 +317,7 @@ public class Simulator extends Thread {
 		anzeige.showStatus(
 				schritt,
 				feld,
-				"Füchse: " + Fuchs.anzahl + " Hasen: " + Hase.anzahl + " Jaeger: "+ Jaeger.anzahl);
+				"Füchse: " + Fuchs.anzahl + " Hasen: " + Hase.anzahl + " Jäger: "+ Jaeger.anzahl);
 
 	}
 
