@@ -50,11 +50,6 @@ public class Simulator extends Thread {
 			}
 		}
 
-		// TODO: fehlende Implementierung erg채nzen
-		// erzeuge zuf채llig zuerst Pflanzen, dann sp채ter Hasen, dann F체chse
-		// siehe Aufgaben 1b (Kohl), 2a (Hasen) und 3 (F체chse)
-
-
 		// erzeuge zuf채llige Reihenfolge der Tiere
 		Collections.shuffle(lebewesen);
 	}
@@ -62,9 +57,7 @@ public class Simulator extends Thread {
 	/**
 	 * Erzeuge zuf채llig neue Pflanzen auf freie Felder mit guter Erde.
 	 */
-	private void erzeugePflanzen() {
-
-		// TODO: fehlende Implementierung erg채nzen (siehe Aufgabe 1a)		
+	private void erzeugePflanzen() {		
 		
 		double RANDOM_ERZEUGUNG;
 		int height = getHeight();
@@ -76,10 +69,6 @@ public class Simulator extends Thread {
 				RANDOM_ERZEUGUNG = Math.random();
 				if (empty==true&&good==true&&KOHL_ERZEUGUNG>=RANDOM_ERZEUGUNG){
 					erzeugeKohl(i,j);
-				}
-				else if (empty==true&&(KOHL_ERZEUGUNG+JAEGER_ERZEUGUNG)>RANDOM_ERZEUGUNG){
-					System.out.println("J횳ER RANDOM   "+RANDOM_ERZEUGUNG);
-					erzeugeJaeger(i,j);
 				}
 			}
 		}
